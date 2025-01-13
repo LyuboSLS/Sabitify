@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragments"
+    app:startDestination="@id/menuEvents">
+
+    <fragment
+        android:id="@+id/menuEvents"
+        android:name="hr.algebra.sabitify.fragments.EventsFragment"
+        android:label="@string/events"
+        tools:layout="@layout/fragment_events" />
+    <fragment
+        android:id="@+id/menuClubs"
+        android:name="hr.algebra.sabitify.fragments.ClubsFragment"
+        android:label="@string/clubs"
+        tools:layout="@layout/fragment_clubs" />
+    <fragment
+        android:id="@+id/menuAboutUs"
+        android:name="hr.algebra.sabitify.fragments.AboutFragment"
+        android:label="@string/about_us"
+        tools:layout="@layout/fragment_about" />
+
+
+</navigation>

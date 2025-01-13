@@ -16,4 +16,10 @@
         Enhance your university experience through unique opportunities.
         Get ready to make the most of your time in Bulgaria — because student life is more than just academics.
         Dive in and start exploring today! Your next adventure is just a click away.</string>
+    <string name="events">Events</string>
+    <string name="clubs">Clubs</string>
+    <string name="exit">Exit</string>
+    <string name="do_you_really_want_to_exit">Do you really want to exit?</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
 </resources>

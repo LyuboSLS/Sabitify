@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/_100dp"
+
     tools:context=".SplashScreenActivity">
 
     <ImageView

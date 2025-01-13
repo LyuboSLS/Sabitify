@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuEvents"
+        android:title="@string/events" />
+    <item
+        android:id="@+id/menuClubs"
+        android:title="@string/clubs" />
+    <item
+        android:id="@+id/menuAboutUs"
+        android:title="@string/about_us" />
+
+
+</menu>

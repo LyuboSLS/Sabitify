@@ -25,6 +25,7 @@
             android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"
+            android:noHistory="true"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
