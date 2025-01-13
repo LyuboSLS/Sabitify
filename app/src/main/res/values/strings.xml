@@ -2,4 +2,18 @@
     <string name="app_name">Sabitify</string>
     <string name="please_wait">Please wait…</string>
     <string name="no_internet_connection">No internet connection !!!!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_us">About us</string>
+    <string name="about_us_description">Welcome to Sabitify, your go-to platform for discovering student events and clubs in Bulgaria!
+        Our mission is to connect students with vibrant opportunities to learn, grow, and have fun.
+        Whether you\'re looking for social meetups, professional workshops, cultural festivals, or athletic clubs,
+        we’ve got you covered. Explore a wide range of activities hosted by local student organizations and find your community.
+        With Sabitify, you can:
+        Stay updated on upcoming events and activities in Bulgaria.
+        Join clubs that match your interests and passions.
+        Meet like-minded peers and build lasting connections.
+        Enhance your university experience through unique opportunities.
+        Get ready to make the most of your time in Bulgaria — because student life is more than just academics.
+        Dive in and start exploring today! Your next adventure is just a click away.</string>
 </resources>
