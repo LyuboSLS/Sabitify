@@ -10,7 +10,7 @@ class SabitifyWorker(
 ) : Worker(context, parameters) {
 
     override fun doWork(): Result {
-        SabitivyFetcher(context).fetchItems(10)
+        SabitivyFetcher(context).fetchItems()
         return Result.success()
     }
 }

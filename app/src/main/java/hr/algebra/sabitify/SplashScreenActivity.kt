@@ -1,19 +1,19 @@
 package hr.algebra.sabitify
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import hr.algebra.nasa.framework.applyAnimation
+import hr.algebra.nasa.framework.callDelayed
+import hr.algebra.nasa.framework.getBooleanPreference
+import hr.algebra.nasa.framework.isOnline
+import hr.algebra.nasa.framework.startActivity
 import hr.algebra.sabitify.api.SabitifyWorker
 import hr.algebra.sabitify.databinding.ActivitySplashScreenBinding
-import hr.algebra.sabitify.framework.applyAnimation
-import hr.algebra.sabitify.framework.getBooleanPreferences
-import hr.algebra.sabitify.framework.isOnline
-import hr.algebra.sabitify.framework.startActivity
-import kotlinx.coroutines.Runnable
+
 
 private const val DELAY = 3000L
 const val DATA_IMPORTED = "hr.algebra.sabitify.data_imported"
@@ -37,7 +37,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
 
     private fun redirect() {
-        if (getBooleanPreferences(DATA_IMPORTED)) {
+        if (getBooleanPreference(DATA_IMPORTED)) {
             callDelayed(DELAY) {
                 startActivity<HostActivity>()
             }
@@ -59,12 +59,5 @@ class SplashScreenActivity : AppCompatActivity() {
 
 
         }
-    }
-
-    fun callDelayed(time: Long, work: Runnable) {
-        Handler(Looper.getMainLooper()).postDelayed(
-            work,
-            time
-        )
     }
 }

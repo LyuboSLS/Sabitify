@@ -22,4 +22,5 @@
     <string name="do_you_really_want_to_exit">Do you really want to exit?</string>
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
+    <string name="logo">logo</string>
 </resources>

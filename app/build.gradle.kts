@@ -54,7 +54,10 @@ dependencies {
     // navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
+// retrofit
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
