@@ -8,9 +8,9 @@ data class SabitifyEventItem(
     @SerializedName("address") val address: List<String>,
     @SerializedName("link") val link: String,
     @SerializedName("event_location_map") val eventLocationMap: SabitifyEventLocationMap,
-    @SerializedName("description") val description: String,
+    @SerializedName("description") val description: String?,
     @SerializedName("ticket_info") val ticketInfo: List<SabitifyEventTicketInfo>,
-    @SerializedName("venue") val venue: SabitifyEventVenue,
+    @SerializedName("venue") val venue: SabitifyEventVenue?,
     @SerializedName("thumbnail") val thumbnail: String,
-    @SerializedName("image") val image: String
+    @SerializedName("image") val image: String?
 )

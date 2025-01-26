@@ -62,23 +62,31 @@ class SabitivyFetcher(private val context: Context) {
                 Item(
                     _id = null,
                     title = it.title,
-                    date = EventDate(it.date.val_when),
+                    date = EventDate(it.date.start_date),
                     address = it.address,
                     link = it.link,
                     eventLocationMap = EventLocation(it.eventLocationMap.link),
-                    description = it.description,
+                    description = it.description ?: "no description",
                     ticketInfo = ticketInfos,
-                    venue = Venue(
-                        it.venue.name,
-                        it.venue.rating,
-                        it.venue.reviews,
-                        it.venue.link
+                    venue = it.venue?.let { venue ->
+                        Venue(
+                            name = venue.name ?: "Unknown venue",
+                            rating = venue.rating ?: 0.0,
+                            reviews = venue.reviews ?: 0,
+                            link = venue.link ?: ""
+                        )
+                    } ?: Venue(
+                        name = "Unknown venue",
+                        rating = 0.0,
+                        reviews = 0,
+                        link = ""
                     ),
-                    thumbnail = null,
-                    image = null,
+                    thumbnail = it.thumbnail ?: "no image",
+                    image = it.image ?: "no image",
                     read = false
                 )
             )
+
         }
         context.sendBroadcast<SabitifyReceiver>()
     }
