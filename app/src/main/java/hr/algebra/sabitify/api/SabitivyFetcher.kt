@@ -4,19 +4,29 @@ import android.content.Context
 import android.util.Log
 import hr.algebra.nasa.framework.sendBroadcast
 import hr.algebra.sabitify.SabitifyReceiver
+import hr.algebra.sabitify.handler.downloadImage
 import hr.algebra.sabitify.model.EventDate
 import hr.algebra.sabitify.model.EventLocation
 import hr.algebra.sabitify.model.Item
 import hr.algebra.sabitify.model.TicketInfo
 import hr.algebra.sabitify.model.Venue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+// SabitivyFetcher.kt
 class SabitivyFetcher(private val context: Context) {
     private val sabitifyApi: SabitifyApi
+    private val scope = CoroutineScope(Dispatchers.Main + Job())
 
     init {
         val retrofit = Retrofit.Builder()
@@ -27,69 +37,69 @@ class SabitivyFetcher(private val context: Context) {
     }
 
     fun fetchItems() {
-        val request = sabitifyApi.fetchItems()
-
-
-        request.enqueue(/* callback = */ object : Callback<SabitifyEvents> {
+        sabitifyApi.fetchItems().enqueue(object : Callback<SabitifyEvents> {
             override fun onResponse(
                 call: Call<SabitifyEvents>,
                 response: Response<SabitifyEvents>
             ) {
-                response?.body().let { populateItems(it!!) }
+                response.body()?.let {
+                    scope.launch {
+                        val items = populateItems(it)
+
+                        context.sendBroadcast<SabitifyReceiver>()
+                    }
+                }
             }
 
             override fun onFailure(call: Call<SabitifyEvents>, t: Throwable) {
-                Log.d("DOWNLOAD", t.message, t)
+                Log.e("FETCHER", "API call failed", t)
             }
         })
     }
 
-    private fun populateItems(sabitifyItems: SabitifyEvents) {
-        var items = mutableListOf<Item>()
+    private suspend fun populateItems(sabitifyItems: SabitifyEvents): List<Item> =
+        withContext(Dispatchers.IO) {
+            sabitifyItems.events_results.mapNotNull { event ->
+                try {
+                    // Process images in parallel
+                    val thumbnail = async { event.thumbnail?.let { downloadImage(context, it) } }
+                    val image = async { event.image?.let { downloadImage(context, it) } }
 
-        sabitifyItems.events_results.forEach {
-            val ticketInfos = mutableListOf<TicketInfo>()
-            it.ticketInfo.forEach { info ->
-                ticketInfos.add(
-                    TicketInfo(
-                        info.source,
-                        info.link,
-                        info.link_type
+                    Item(
+                        _id = null,
+                        title = event.title,
+                        date = EventDate(event.date.start_date),
+                        address = event.address,
+                        link = event.link,
+                        eventLocationMap = EventLocation(event.eventLocationMap.link),
+                        description = event.description ?: "",
+                        ticketInfo = event.ticketInfo.map {
+                            TicketInfo(
+                                it.source,
+                                it.link,
+                                it.link_type
+                            )
+                        },
+                        venue = event.venue?.let {
+                            Venue(
+                                it.name ?: "Unknown venue",
+                                it.rating ?: 0.0,
+                                it.reviews ?: 0,
+                                it.link ?: ""
+                            )
+                        } ?: Venue("Unknown venue", 0.0, 0, ""),
+                        thumbnail = thumbnail.await() ?: "no image",
+                        image = image.await() ?: "no image",
+                        read = false
                     )
-                )
+                } catch (e: Exception) {
+                    Log.e("POPULATE_ITEMS", "Error processing item", e)
+                    null
+                }
             }
-            items.add(
-                Item(
-                    _id = null,
-                    title = it.title,
-                    date = EventDate(it.date.start_date),
-                    address = it.address,
-                    link = it.link,
-                    eventLocationMap = EventLocation(it.eventLocationMap.link),
-                    description = it.description ?: "no description",
-                    ticketInfo = ticketInfos,
-                    venue = it.venue?.let { venue ->
-                        Venue(
-                            name = venue.name ?: "Unknown venue",
-                            rating = venue.rating ?: 0.0,
-                            reviews = venue.reviews ?: 0,
-                            link = venue.link ?: ""
-                        )
-                    } ?: Venue(
-                        name = "Unknown venue",
-                        rating = 0.0,
-                        reviews = 0,
-                        link = ""
-                    ),
-                    thumbnail = it.thumbnail ?: "no image",
-                    image = it.image ?: "no image",
-                    read = false
-                )
-            )
-
         }
-        context.sendBroadcast<SabitifyReceiver>()
+
+    fun cancel() {
+        scope.cancel()
     }
 }
-
-
