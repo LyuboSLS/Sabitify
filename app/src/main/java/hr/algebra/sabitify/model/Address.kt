@@ -1,7 +1,8 @@
 package hr.algebra.sabitify.model
 
-data class EventDate(
+data class Address(
     val _id: Int?,
-    val start_date: String,
+    val street: String,
+    val city: String,
     val item_id: Int?
 )

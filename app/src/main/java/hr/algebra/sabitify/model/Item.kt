@@ -5,7 +5,7 @@ data class Item(
     var _id: Long?,
     val title: String,
     val date: EventDate,
-    val address: List<String>,
+    val address: Address,
     val link: String,
     val eventLocationMap: EventLocation,
     val description: String,

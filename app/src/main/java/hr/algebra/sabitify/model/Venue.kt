@@ -1,8 +1,10 @@
 package hr.algebra.sabitify.model
 
 data class Venue(
+    val _id: Int?,
     val name: String,
     val rating: Double,
     val reviews: Int,
-    val link: String
+    val link: String,
+    val item_id: Int?
 )
