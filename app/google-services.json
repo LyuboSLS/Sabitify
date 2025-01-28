@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "920876540439",
+    "project_id": "sabitify",
+    "storage_bucket": "sabitify.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920876540439:android:ad3304cac55e4d2ee83252",
+        "android_client_info": {
+          "package_name": "hr.algebra.sabitify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADLQecdK8ZLXKTkkxHa24qlS2SUA5PeYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
