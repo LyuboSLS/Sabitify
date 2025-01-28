@@ -3,8 +3,8 @@ package hr.algebra.sabitify
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import hr.algebra.nasa.framework.setBooleanPreference
-import hr.algebra.nasa.framework.startActivity
+import hr.algebra.sabitify.framework.setBooleanPreference
+import hr.algebra.sabitify.framework.startActivity
 
 
 class SabitifyReceiver : BroadcastReceiver() {

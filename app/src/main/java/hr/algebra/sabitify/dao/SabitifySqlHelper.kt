@@ -24,20 +24,15 @@ const val EVENT_LOCATION_TABLE = "EventLocation"
 const val TICKET_INFO_TABLE = "TicketInfo"
 const val ADDRESS_TABLE = "Address"
 
-
-// Table creation statements (using constants)
-// Table Creation Statements
-private val CREATE_VENUE_TABLE = """
-    CREATE TABLE $VENUE_TABLE (
-        ${Venue::_id.name} INTEGER PRIMARY KEY AUTOINCREMENT,
-        ${Venue::name.name} TEXT NOT NULL,
-        ${Venue::rating.name} REAL,
-        ${Venue::reviews.name} INTEGER,
-        ${Venue::link.name} TEXT,
-        ${Venue::item_id.name} INTEGER,
-        FOREIGN KEY (${Venue::item_id.name}) REFERENCES $ITEM_TABLE_NAME(${Item::_id.name})
-
-        
+private val CREATE_ITEM_TABLE = """
+    CREATE TABLE $ITEM_TABLE_NAME (
+        ${Item::_id.name} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${Item::title.name} TEXT NOT NULL,
+        ${Item::link.name} TEXT NOT NULL,
+        ${Item::description.name} TEXT NOT NULL,
+        ${Item::thumbnail.name} TEXT,
+        ${Item::image.name} TEXT,
+        ${Item::read.name} INTEGER NOT NULL
     )
 """.trimIndent()
 
@@ -45,11 +40,12 @@ private val CREATE_EVENT_DATE_TABLE = """
     CREATE TABLE $EVENT_DATE_TABLE (
         ${EventDate::_id.name} INTEGER PRIMARY KEY AUTOINCREMENT,
         ${EventDate::start_date.name} TEXT,
-         ${EventDate::item_id.name} INTEGER,
+        ${EventDate::item_id.name} INTEGER,
         FOREIGN KEY (${EventDate::item_id.name}) REFERENCES $ITEM_TABLE_NAME(${Item::_id.name})
     )
 """.trimIndent()
 
+// EventLocation table
 private val CREATE_EVENT_LOCATION_TABLE = """
     CREATE TABLE $EVENT_LOCATION_TABLE (
         ${EventLocation::_id.name} INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,21 +55,16 @@ private val CREATE_EVENT_LOCATION_TABLE = """
     )
 """.trimIndent()
 
-private val CREATE_ITEM_TABLE = """
-     CREATE TABLE $ITEM_TABLE_NAME (
-        ${Item::_id.name} INTEGER PRIMARY KEY AUTOINCREMENT,
-        ${Item::title.name} TEXT NOT NULL,
-        date_id INTEGER,  
-        ${Item::link.name} TEXT NOT NULL,
-        ${Item::eventLocationMap.name}_id INTEGER,  
-        ${Item::description.name} TEXT NOT NULL,
-        ${Item::venue.name}_id INTEGER,  
-        ${Item::thumbnail.name} TEXT,
-        ${Item::image.name} TEXT,
-        "${Item::read.name}" INTEGER NOT NULL,
-        FOREIGN KEY (date_id) REFERENCES $EVENT_DATE_TABLE(${EventDate::_id.name}),
-        FOREIGN KEY (${Item::eventLocationMap.name}_id) REFERENCES $EVENT_LOCATION_TABLE(${EventLocation::_id.name}),
-        FOREIGN KEY (${Item::venue.name}_id) REFERENCES $VENUE_TABLE(${Venue::_id.name})
+// Venue table
+private val CREATE_VENUE_TABLE = """
+    CREATE TABLE $VENUE_TABLE (
+        ${Venue::_id.name} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${Venue::name.name} TEXT NOT NULL,
+        ${Venue::rating.name} REAL,
+        ${Venue::reviews.name} INTEGER,
+        ${Venue::link.name} TEXT,
+        ${Venue::item_id.name} INTEGER,
+        FOREIGN KEY (${Venue::item_id.name}) REFERENCES $ITEM_TABLE_NAME(${Item::_id.name})
     )
 """.trimIndent()
 
@@ -85,6 +76,7 @@ private val CREATE_TICKET_INFO_TABLE = """
         ${TicketInfo::link_type.name} TEXT NOT NULL,
         ${TicketInfo::item_id.name} INTEGER,
         FOREIGN KEY (${TicketInfo::item_id.name}) REFERENCES $ITEM_TABLE_NAME(${Item::_id.name})
+        
     )
 """.trimIndent()
 
@@ -146,13 +138,12 @@ class SabitifySqlHelper(context: Context?) : SQLiteOpenHelper(
 
     override fun deleteAllTables() {
         val db = writableDatabase
-        // Drop tables in reverse dependency order
         db.execSQL("DROP TABLE IF EXISTS $ADDRESS_TABLE")
         db.execSQL("DROP TABLE IF EXISTS $TICKET_INFO_TABLE")
-        db.execSQL("DROP TABLE IF EXISTS $ITEM_TABLE_NAME")
         db.execSQL("DROP TABLE IF EXISTS $EVENT_LOCATION_TABLE")
         db.execSQL("DROP TABLE IF EXISTS $EVENT_DATE_TABLE")
         db.execSQL("DROP TABLE IF EXISTS $VENUE_TABLE")
+        db.execSQL("DROP TABLE IF EXISTS $ITEM_TABLE_NAME")
     }
 
 
@@ -241,8 +232,10 @@ class SabitifySqlHelper(context: Context?) : SQLiteOpenHelper(
     }
 
     override fun queryEventDate(
-        projection: Array<String>?, selection: String?,
-        selectionArgs: Array<String>?, sortOrder: String?
+        projection: Array<String>?,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        sortOrder: String?
     ): Cursor {
         return readableDatabase.query(
             EVENT_DATE_TABLE,

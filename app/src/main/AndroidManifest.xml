@@ -15,11 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sabitify"
         tools:targetApi="31">
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EventPagerActivity"
+            android:exported="false" />
+
         <provider
             android:name=".SabitifyProvider"
             android:authorities="hr.algebra.sabitify.api.provider"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false" />
 
         <receiver
             android:name=".SabitifyReceiver"

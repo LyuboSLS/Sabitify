@@ -1,18 +1,17 @@
 package hr.algebra.sabitify
 
 import android.os.Bundle
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import hr.algebra.nasa.framework.applyAnimation
-import hr.algebra.nasa.framework.callDelayed
-import hr.algebra.nasa.framework.getBooleanPreference
-import hr.algebra.nasa.framework.isOnline
-import hr.algebra.nasa.framework.startActivity
 import hr.algebra.sabitify.api.SabitifyWorker
 import hr.algebra.sabitify.databinding.ActivitySplashScreenBinding
+import hr.algebra.sabitify.framework.applyAnimation
+import hr.algebra.sabitify.framework.callDelayed
+import hr.algebra.sabitify.framework.getBooleanPreference
+import hr.algebra.sabitify.framework.isOnline
+import hr.algebra.sabitify.framework.startActivity
 
 
 private const val DELAY = 3000L

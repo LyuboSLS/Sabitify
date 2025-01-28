@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_events" />
     <fragment
         android:id="@+id/menuClubs"
-        android:name="hr.algebra.sabitify.fragments.ClubsFragment"
+        android:name="hr.algebra.sabitify.fragments.LikedFragment"
         android:label="@string/clubs"
-        tools:layout="@layout/fragment_clubs" />
+        tools:layout="@layout/fragment_liked" />
     <fragment
         android:id="@+id/menuAboutUs"
         android:name="hr.algebra.sabitify.fragments.AboutFragment"

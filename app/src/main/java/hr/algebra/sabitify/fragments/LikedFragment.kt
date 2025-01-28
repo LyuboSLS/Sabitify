@@ -6,25 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import hr.algebra.sabitify.R
 import hr.algebra.sabitify.adapter.EventAdapter
 import hr.algebra.sabitify.databinding.FragmentEventsBinding
-import hr.algebra.sabitify.framework.fetchItems
 import hr.algebra.sabitify.model.Item
 
 
-class EventsFragment : Fragment() {
+class LikedFragment : Fragment() {
+
     private lateinit var binding: FragmentEventsBinding
     private lateinit var items: MutableList<Item>
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        items = requireContext().fetchItems()
-        binding = FragmentEventsBinding.inflate(inflater, container, false)
-
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,4 +26,10 @@ class EventsFragment : Fragment() {
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_liked, container, false)
+    }
 }

@@ -5,5 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".fragments.EventsFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>
