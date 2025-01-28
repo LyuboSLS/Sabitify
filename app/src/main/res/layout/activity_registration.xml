@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sabitify_logo">
@@ -19,7 +20,6 @@
         android:orientation="vertical"
         android:padding="28dp">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,6 @@
             android:textColor="@color/white"
             android:textSize="32sp"
             android:textStyle="bold" />
-
 
     </LinearLayout>
 
@@ -49,16 +48,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome"
+                android:text="@string/register"
                 android:textColor="?colorOnPrimary"
                 android:textSize="32sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:text="Please login with your information" />
+                android:text="@string/please_register_with_your_information" />
 
             <View
                 android:layout_width="wrap_content"
@@ -68,13 +68,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:text="Email Address"
-                android:textStyle="bold" />
+                android:text="@string/full_name"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
             <EditText
+                android:id="@+id/etFullName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:drawableEnd="@drawable/done_icon"
+                android:hint="@string/enter_your_full_name"
+                android:inputType="textPersonName" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text="@string/email_address"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:drawableEnd="@drawable/done_icon"
+                android:hint="@string/enter_your_email"
                 android:inputType="textEmailAddress" />
 
             <View
@@ -85,49 +108,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:text="Password"
+                android:text="@string/password"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:drawableEnd="@drawable/password_icon"
+                android:hint="@string/enter_your_password"
                 android:inputType="textPassword" />
 
-            <RelativeLayout
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text="@string/password"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etConfirmPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:alpha="0.7"
-                    android:text="Remember me" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:text="I forgot my password" />
-
-            </RelativeLayout>
+                android:layout_height="50dp"
+                android:drawableEnd="@drawable/password_icon"
+                android:hint="@string/confirm_your_password"
+                android:inputType="textPassword" />
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="10dp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Login"
-                app:cornerRadius="32dp" />
+                android:text="@string/register"
+                app:cornerRadius="32dp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="16dp"
+                android:text="@string/already_have_an_account"
+                android:textColor="?colorPrimary"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-
     </androidx.cardview.widget.CardView>
-
 
 </RelativeLayout>

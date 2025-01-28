@@ -6,30 +6,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import hr.algebra.sabitify.R
 import hr.algebra.sabitify.adapter.EventAdapter
-import hr.algebra.sabitify.databinding.FragmentEventsBinding
+import hr.algebra.sabitify.databinding.FragmentLikedBinding
+import hr.algebra.sabitify.framework.fetchItems
 import hr.algebra.sabitify.model.Item
 
 
 class LikedFragment : Fragment() {
-
-    private lateinit var binding: FragmentEventsBinding
+    private lateinit var binding: FragmentLikedBinding
     private lateinit var items: MutableList<Item>
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        items = requireContext().fetchItems().toMutableList()
+
+        binding = FragmentLikedBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvItems.apply {
+
+        // Set up the RecyclerView with the filtered list of read events
+        binding.rvLikedItems.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = EventAdapter(requireContext(), items)
         }
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_liked, container, false)
     }
-}
