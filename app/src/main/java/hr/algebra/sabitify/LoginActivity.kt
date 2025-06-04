@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(applicationContext, "Login successful!!", Toast.LENGTH_LONG)
                         .show()
-                    startActivity<SplashScreenActivity>() // Navigate to HostActivity
+                    startActivity<SplashScreenActivity>()
                 } else {
                     Toast.makeText(applicationContext, "Login failed!!", Toast.LENGTH_LONG).show()
                 }

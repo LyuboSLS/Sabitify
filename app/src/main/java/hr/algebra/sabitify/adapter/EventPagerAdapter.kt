@@ -1,5 +1,6 @@
 package hr.algebra.sabitify.adapter
 
+import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
@@ -26,13 +27,23 @@ class EventPagerAdapter(
         private val tvItem = itemView.findViewById<TextView>(R.id.tvEventTitleText)
         private val tvDate = itemView.findViewById<TextView>(R.id.tvDate)
         private val tvExplanation = itemView.findViewById<TextView>(R.id.tvEventDescription)
+        private val tvLocation = itemView.findViewById<TextView>(R.id.tvEventVenue)
+        @SuppressLint("SetTextI18n")
         fun bind(item: Item) {
             tvItem.text = item.title
             tvDate.text = item.date?.start_date ?: "no date"
             tvExplanation.text = item.description
             ivRead.setImageResource(
-                if (item.read) R.drawable.liked else R.drawable.disliked
+                if (item.liked) R.drawable.liked else R.drawable.disliked
             )
+            if ( item.address?.city == "" && item.address?.street == ""){
+                tvLocation.text ="unknown"
+            }
+            else{
+                tvLocation.text = item.address?.city + ", " + item.address?.street
+            }
+
+
             Picasso.get()
                 .load(File(item.image))
                 .error(R.drawable.sabitify_logo)
@@ -59,11 +70,11 @@ class EventPagerAdapter(
 
     private fun updateItem(position: Int) {
         val item = items[position]
-        item.read = !item.read
+        item.liked = !item.liked
         context.contentResolver.update(
             ContentUris.withAppendedId(SABITIFY_PROVIDER_CONTENT_URI_ITEMS, item._id!!),
             ContentValues().apply {
-                put(Item::read.name, item.read)
+                put(Item::liked.name, item.liked)
             },
             null,
             null

@@ -32,7 +32,7 @@ private val CREATE_ITEM_TABLE = """
         ${Item::description.name} TEXT NOT NULL,
         ${Item::thumbnail.name} TEXT,
         ${Item::image.name} TEXT,
-        ${Item::read.name} INTEGER NOT NULL
+        ${Item::liked.name} INTEGER NOT NULL
     )
 """.trimIndent()
 

@@ -24,13 +24,14 @@
             android:layout_marginTop="@dimen/_20dp">
 
             <TextView
+                android:id="@+id/tvEventTitleText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:text="@string/date"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="@android:color/holo_red_light"
                 android:textSize="@dimen/_20sp"
-                android:textStyle="bold" />
+                tools:text="@tools:sample/lorem"
+                tools:ignore="Suspicious0dp" />
 
             <ImageView
                 android:id="@+id/ivRead"
@@ -42,9 +43,23 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvDate"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:text="@string/date"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/_20sp"
+            android:textStyle="bold" />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/when"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="@dimen/_20sp"
             tools:text="@tools:sample/date/mmddyy" />
@@ -52,18 +67,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title"
+            android:text="@string/where"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="@dimen/_20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvEventTitleText"
+            android:id="@+id/tvEventVenue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="@dimen/_20sp"
-            tools:text="@tools:sample/lorem" />
+            tools:text="@tools:sample/lorem/random" />
+
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,12 +100,7 @@
             android:textSize="@dimen/_20sp"
             tools:text="@tools:sample/lorem/random" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/where"
-            android:textColor="@android:color/holo_red_dark"
-            android:textStyle="bold" />
+
 
     </LinearLayout>
 </ScrollView>

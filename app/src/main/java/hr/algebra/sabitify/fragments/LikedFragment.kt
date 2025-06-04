@@ -15,12 +15,16 @@ import hr.algebra.sabitify.model.Item
 class LikedFragment : Fragment() {
     private lateinit var binding: FragmentLikedBinding
     private lateinit var items: MutableList<Item>
+   private var likedItems: MutableList<Item> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         items = requireContext().fetchItems().toMutableList()
+        items.forEach{
+           if (it.liked) likedItems.add(it)
+        }
 
         binding = FragmentLikedBinding.inflate(inflater, container, false)
 
@@ -33,7 +37,7 @@ class LikedFragment : Fragment() {
         // Set up the RecyclerView with the filtered list of read events
         binding.rvLikedItems.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = EventAdapter(requireContext(), items)
+            adapter = EventAdapter(requireContext(), likedItems)
         }
     }
     }

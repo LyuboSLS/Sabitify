@@ -55,4 +55,6 @@
     <string name="enter_your_full_name">Enter your full name</string>
     <string name="full_name">Full name</string>
     <string name="please_register_with_your_information">Please register with your information</string>
+    <string name="liked_events">Liked events</string>
+    <string name="when">When</string>
 </resources>

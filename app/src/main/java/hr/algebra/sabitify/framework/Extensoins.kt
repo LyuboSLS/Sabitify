@@ -103,6 +103,7 @@ fun Context.fetchItems(): MutableList<Item> {
             val thumbnail = cursor.getString(cursor.getColumnIndex(Item::thumbnail.name))
             val image = cursor.getString(cursor.getColumnIndex(Item::image.name))
             val description = cursor.getString(cursor.getColumnIndex(Item::description.name))
+            val liked = cursor.getInt(cursor.getColumnIndex(Item::liked.name))
 
             val date = fetchEventDate(itemId)
             val venue = fetchVenue(itemId)
@@ -120,10 +121,11 @@ fun Context.fetchItems(): MutableList<Item> {
                     description = description,
                     thumbnail = thumbnail,
                     image = image,
-                    read = false,
+                    liked = liked != 0,
                     eventLocationMap = eventLocation,
                     ticketInfo = ticketInfo,
                     venue = venue
+
                 )
             )
         }

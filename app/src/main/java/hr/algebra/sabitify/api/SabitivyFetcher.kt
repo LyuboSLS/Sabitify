@@ -71,7 +71,7 @@ class SabitivyFetcher(private val context: Context) {
                         put(Item::description.name, eventItem.description ?: "")
                         put(Item::thumbnail.name, thumbnailPath ?: "")
                         put(Item::image.name, imagePath ?: "")
-                        put(Item::read.name, false)
+                        put(Item::liked.name, false)
                     }
 
                     val itemUri = context.contentResolver.insert(

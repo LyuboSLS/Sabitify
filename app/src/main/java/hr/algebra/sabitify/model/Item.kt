@@ -13,6 +13,6 @@ data class Item(
     val venue: Venue?,
     val thumbnail: String?,
     val image: String?,
-    var read: Boolean
+    var liked: Boolean
 
 )
